@@ -165,6 +165,7 @@ LiquidCrystal_I2C lcd(
 #pragma region FUNCTIONS_SECTION
 
 bool paperWasPressed = false; // it has to be here for coinInterrupt to read it
+int papersDispensed = 0;
 
 // attached to the coin pin and increments the credits whenever something is
 // detected. It also flags the data that was inserted so the lcd may update as
@@ -332,7 +333,7 @@ void creditsCompensate(){
 // Dispenses paper according to paper type (Paper_Letter, Paper_Legal, Paper_A3)
 void makePaper(uint8_t PaperType, int amount) {
     detachInterrupt(digitalPinToInterrupt(COIN));
-    
+    papersDispensed = amount;
     int PinForwardPrint = 0;
     int PinReverseHead = 0;
     int PinForwardHead = 0;
@@ -540,7 +541,8 @@ void setup() {
             if(paperWasPressed){
                 attachInterrupt(digitalPinToInterrupt(COIN), coinInterrupt, FALLING);
                 delay(1000);
-                credits = credits -1;
+                credits = credits - papersDispensed;
+                papersDispensed = 0; // clear out papers
                 paperWasPressed = false;
             }
 
