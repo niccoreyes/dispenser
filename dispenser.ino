@@ -334,6 +334,7 @@ void creditsCompensate(){
 void makePaper(uint8_t PaperType, int amount) {
     detachInterrupt(digitalPinToInterrupt(COIN));
     papersDispensed = amount;
+
     int PinForwardPrint = 0;
     int PinReverseHead = 0;
     int PinForwardHead = 0;
@@ -541,8 +542,10 @@ void setup() {
             if(paperWasPressed){
                 attachInterrupt(digitalPinToInterrupt(COIN), coinInterrupt, FALLING);
                 delay(1000);
-                credits = credits - papersDispensed;
+                
+                credits = credits - papersDispensed - 1; //-1 is for compensation
                 papersDispensed = 0; // clear out papers
+                
                 paperWasPressed = false;
             }
 
