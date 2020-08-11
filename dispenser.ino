@@ -404,12 +404,12 @@ void dispenseById(uint8_t ItemId, int amountToDispense = 1) {
             makeSteps(BPenPin, amountToDispense);
             break;
         case letter:  // LETTER
-            makePaper(Paper_Letter, amountToDispense);
             creditsCompensate();
+            makePaper(Paper_Letter, amountToDispense);
             break;
         case longbond:  // Long
-            makePaper(Paper_Legal, amountToDispense);
             creditsCompensate();
+            makePaper(Paper_Legal, amountToDispense);
             break;
         // case a3paper:  // A3
         //     makePaper(Paper_A3, amountToDispense);
