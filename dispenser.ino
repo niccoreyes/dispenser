@@ -543,7 +543,7 @@ void setup() {
                 attachInterrupt(digitalPinToInterrupt(COIN), coinInterrupt, FALLING);
                 delay(1000);
                 
-                credits = credits - papersDispensed - 1; //-1 is for compensation
+                credits = credits - papersDispensed; //
                 papersDispensed = 0; // clear out papers
                 
                 paperWasPressed = false;
